@@ -1,0 +1,29 @@
+.bodyGame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  width: 100%;
+}
+
+.container {
+  background-color: blue;
+}
+
+
+.container .content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 35vw;
+  gap: 1vw;
+  padding: 1vw 1vh;
+  background-color: red;
+}
+
+.container .content .botao {
+  width: 5vw;
+  height: 7vh;
+}
