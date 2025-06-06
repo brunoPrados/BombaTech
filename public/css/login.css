@@ -39,7 +39,7 @@ header a {
 
 }
 
-header a::after {
+header .text::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -52,11 +52,11 @@ header a::after {
   transform-origin: bottom center;
 }
 
-header a:hover {
+header .text:hover {
   color: #0084FF;
 }
 
-header a:hover::after {
+header .text:hover::after {
   transform: scaleX(1);
   transform-origin: bottom center;
 }
