@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/cadastro.css">
+  <title>SPBets | Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body class="bodyLogin">
+  <header>
+    <a href="../index.html">START GAME</a>
+    <a href="#">LOGIN</a>
+    <a href="">CADASTRO</a>
+    <a href="">RANKING</a>
+
+  </header>
+
+  <div class="conteiner2">
+    <div class="caixa">
+      <div class="sub-caixa">
+        <img src="/public/assets/imgs/Bombicon.png" alt="">
+        <h1>SPBets</h1>
+      </div>
+    </div>
+
+    <div class="card card-login">
+      <h2>Faça seu cadastro!</h2>
+      <div class="formulario">
+        <div class="campo">
+          <span>Nome:</span>
+          <input id="nome_input" type="text" placeholder="Nome">
+        </div>
+        <div class="campo">
+          <span>E-mail:</span>
+          <input id="email_input" type="text" placeholder="email@.com">
+        </div>
+        <div class="campo">
+          <span>Senha:</span>
+          <input id="senha_input" type="password" placeholder="******">
+        </div>
+        <button class="botao" onclick="cadastrar()">Cadastrar</button>
+
+      </div>
+      <p id="status" style="color: white;"></p>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+  function cadastrar() {
+    let nomeVar = document.getElementById('nome_input').value;
+    let emailVar = document.getElementById('email_input').value;
+    let senhaVar = document.getElementById('senha_input').value;
+
+    fetch('/usuarios/cadastrar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(
+        {
+          nomeServer: nomeVar,
+          emailServer: emailVar,
+          senhaServer: senhaVar
+        }
+      )
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          status.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+</script>
