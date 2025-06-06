@@ -10,9 +10,10 @@ def form():
 
 @app.route('/inserir', methods=['POST'])
 def inserir():
-    nome = request.form['nome']
-    email = request.form['email']
-    senha = request.form['senha']
+    dados = request.get_json()
+    nome = dados.get('nome', 0)
+    email = dados.get('email', 0)
+    senha = dados.get('senha', 0)
 
     mydb = mysql.connector.connect(
         host="localhost",
@@ -40,8 +41,9 @@ def minigame():
 
 @app.route('/logar', methods=['POST'])
 def logar():
-    email = request.form['email']
-    senha = request.form['senha']
+    dados = request.get_json()
+    email = dados.get('email', 0)
+    senha = dados.get('senha', 0)
 
     mydb = mysql.connector.connect(
         host="localhost",
@@ -60,7 +62,7 @@ def logar():
         session['usuario'] = usuario['nome']
         return redirect('/minigame')
     else:
-        return "Login inválido!"
+        return jsonify({'sucesso': False})
 
 @app.route('/pontuacao')
 def pontuacao():

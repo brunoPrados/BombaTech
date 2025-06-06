@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>SPBets | Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body class="bodyLogin">
+  <header>
+    <a href="../index.html">START GAME</a>
+    <a href="#">LOGIN</a>
+    <a href="">CADASTRO</a>
+    <a href="">RANKING</a>
+    
+  </header>
+
+  <div class="conteiner2">
+    <div class="caixa">
+      <div class="sub-caixa">
+        <img src="/public/assets/imgs/Bombicon.png" alt="">
+        <h1>SPBets</h1>
+      </div>
+    </div>
+
+    <div class="card card-login">
+      <h2>Faça seu Login!</h2>
+      <div class="formulario">
+        <div class="campo">
+          <span>Nome:</span>
+          <input id="nome_input" type="text" placeholder="Nome">
+        </div>
+        <div class="campo">
+          <span>E-mail:</span>
+          <input id="email_input" type="text" placeholder="email@.com">
+        </div>
+        <div class="campo">
+          <span>Senha:</span>
+          <input id="senha_input" type="password" placeholder="******">
+        </div>
+        <button class="botao" onclick="cadastrar()">Entrar</button>
+          
+      </di
+      <p id="status"></p>v>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+  function sessao() {
+    let email = document.getElementById("input_email").value;
+    let senha = document.getElementById("input_senha").value;
+
+    sessionStorage.setItem("email_sessao", email);
+    sessionStorage.setItem("senha_sessao", senha);
+  }
+
+  function enviar() {
+      let nomeVar = document.getElementById('nome_input');
+      let emailVar = document.getElementById('email_input');
+      let senhaVar = document.getElementById('senha_input');
+
+      fetch('/inserir', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify
+        ({
+            nome: nomeVar,
+            email: emailVar,
+            senha: senhaVar
+         })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.sucesso) {
+          status.innerHTML = "Cadastro enviado com sucesso!";
+        } else {
+          status.innerHTML = "Erro ao enviar cadastro.";
+        }
+      })
+      .catch(() => {
+        status.innerHTML = "Erro de conexão.";
+      });
+    }
+
+</script>
